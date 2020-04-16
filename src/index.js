@@ -36,4 +36,12 @@ function setData(data) {
 // })
 //////
 
+$('.login-box').keyup(function() {
+  if ($('#login-Name').val().length >= 1 && $('#login-Password').val().length >= 1) {
+    $('#login-image').toggleClass("disabled")
+  } else {
+    $('#login-image').addClass("disabled")
+  }
+})
+
 getAllData().then(data => setData(data))
