@@ -6,49 +6,53 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-image: url(https://images.unsplash.com/photo-1556292990-e4f4a36222e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
 }
 
 .static-container{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: auto;
-  margin-top: 10%;
-  height: 75%;
-  width: 75%;
+  flex-flow: wrap;
+  width: 100%;
+  max-width: 90%;
+  background-color: rgba(0, 25, 0, 0.7);
 }
 
-.hotel-description-box {
-  width:50%;
-  height:75%;
+.hotel-info-box{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  width:100%
+}
+
+.hotel-description {
   color: white;
-  font-size: 150%;
-  background-color:rgba(0, 25, 0, 0.5);
-  min-width: 20rem;
+  padding: 1.5em;
+  display: flex;
+  align-items: center;
 }
 
 #hotel-about-me{
   text-align: center;
-  text-align: justify;
-  text-justify: inter-word;
+  font-size: 150%;
+  font-family: 'Cardo', serif;
 }
 
 #hotel-name {
   text-transform: uppercase;
-  color: #BBCBDC;
+  color: #BBCBDC
 }
 
-.main-img-containter {
-  width:50%;
-  height:75%;
-  min-width: 20rem;
+.main-img-containter,
+.hotel-description {
+   width:50%;
 }
 
 #hotel-load-image{
-  height: 100%;
   width: 100%;
 }
 
@@ -57,9 +61,8 @@ body {
   flex-direction:column;
   justify-content: center;
   align-items: center;
-  background-color:rgba(0, 25, 0, 0.5);
   width:100%;
-  height:25%;
+  padding-bottom: 2em;
 }
 
 .login-instruction-text {
@@ -68,21 +71,18 @@ body {
 }
 
 .login-verification {
-  margin: 0, 20px, 0, 20px;
   border: 2px solid white;
-  padding: 15px;
+  padding: 10px;
   color: white;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 100%;
+  text-align: center;
 }
 
 .login-verification::placeholder {
-  font-size: 125%;
+  font-size: 115%;
   color: white;
   opacity: .5;
-}
-
-.test{
-  display: inline;
 }
 
 .login-input{
@@ -91,9 +91,18 @@ body {
 }
 
 #login-image {
-  width: 3rem;
+  width: 2.5rem;
+  background-color: green;
 }
 
 .disabled{
-  opacity: .3;
+  opacity: .1;
+}
+
+
+@media screen and (max-width: 1130px) {
+  .main-img-containter,
+  .hotel-description {
+     width:100%;
+  }
 }
