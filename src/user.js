@@ -1,22 +1,38 @@
+const moment = require('moment')
+
 class User {
-  constuctor(name, id) {
+  constructor(name, id) {
     this.name = name;
     this.id = id;
-    this.bookings = this.getFutureBookings(id);
-    this.pastBookings = this.getPastBookings(id);
-    this.totalSpent = this.getTotalSpent(id);
+    this.futureBookings = [];
+    this.pastBookings = [];
+    this.totalSpent = 0;
   }
-  getFutureBookings(id) {
-    //iteratre through bookings data and match all bookings by id from today on
+  getFutureBookings(bookingData) {
+    let todayDate = moment().format('YYYY/MM/DD')
+    this.futureBookings = bookingData
+      .filter(booking => booking.userID === this.id)
+      .filter(booking => booking.date > todayDate)
   }
 
-  getPastBookings(id) {
-    //iteratre through bookings data and match all yesterady and beyond
+  getPastBookings(bookingData) {
+    let todayDate = moment().format('YYYY/MM/DD')
+    this.pastBookings = bookingData
+      .filter(booking => booking.userID === this.id)
+      .filter(booking => booking.date < todayDate)
   }
 
-  getTotalSpent() {
-    //itterate through all bookings match value of rooms and return the value
+  getTotalSpent(bookingData, roomsData) {
+    let allUserBookings = bookingData.filter(booking => booking.userID === this.id)
+    let currentUserTotal = allUserBookings.reduce((acc, userBooking) => {
+      let roomValue = roomsData.find(room => room.number === userBooking.roomNumber).costPerNight
+      acc += roomValue
+      return acc;
+    }, 0)
+    this.totalSpent = currentUserTotal;
   }
+
+
 }
 
 export default User;
