@@ -29,7 +29,6 @@
  - [ ] _mixins.scss
 #### SRC
  - [ ] index.js
- - [ ] User.js
  - [ ] Manager.js
  - [ ] Fetcher.js
  - [ ] User.js
