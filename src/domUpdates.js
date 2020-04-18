@@ -11,14 +11,18 @@ const domUpdates = {
     <div class="user-important-info">
       <div class="user-interaction-box">
         <p id="booking-instructions">Please choose a date to create a new booking</p>
-        <input id="user-requested-booking-date"type="date" placeholder="dd/mm/yyyy">
+        <input id="user-requested-booking-date" type="date" placeholder="dd/mm/yyyy">
         <button id="create-booking-button" type="button" name="button">Create Booking</button>
         <div class="room-selector-box">
+          <p>Please select your desired room type</p>
           <span><input type="radio" class="room-button-selector" id="residential-suite-selector" name="residential-suite" value="residential-suite"><label>Residential Suite</label></span>
           <span><input type="radio" class="room-button-selector" id="single-room-selector" name="ingle-room" value="ingle-room"><label>Single Room</label></span>
           <span><input type="radio" class="room-button-selector" id="junior-suite-selector" name="junior-suite" value="junior-suite"><label>Junior Suite</label></span>
           <span><input type="radio" class="room-button-selector" id="suite-selector" name="suite" value="suite"><label>Suite</label></span>
         </div>
+        <div id='available-room-details'>
+        </div>
+        <p id='total-user-spent'></p>
       </div>
       <div class="user-upcoming-bookings-box">
         <p id="upcoming-bookings-text">All Upcoming Bookings</p>
@@ -62,7 +66,8 @@ const domUpdates = {
       </div>
     </div>`)
     this.insertFutureBookings(currentUser)
-    this.inserPastBookings(currentUser)
+    this.insertPastBookings(currentUser)
+    this.insertTotalSpent(currentUser)
   },
 
   insertFutureBookings(currentUser) {
@@ -71,12 +76,15 @@ const domUpdates = {
     })
   },
 
-  inserPastBookings(currentUser) {
+  insertPastBookings(currentUser) {
     currentUser.pastBookings.forEach(booking => {
       $('#user-past-bookings-list').append(`<li>${booking.date} in room ${booking.roomNumber}</li>`)
     })
-  }
+  },
 
+  insertTotalSpent(currentUser) {
+    $('#total-user-spent').text(`You have spent a total of $${currentUser.totalSpent}`)
+  }
 }
 
 export default domUpdates;
