@@ -17,6 +17,7 @@ body {
 .static-container{
   display: flex;
   flex-flow: wrap;
+  flex-direction: column;
   width: 100%;
   max-width: 90%;
   background-color: rgba(0, 25, 0, 0.7);
@@ -99,6 +100,67 @@ body {
   opacity: .1;
 }
 
+//below is userProfile
+
+.welcome-message{
+  width: 100%;
+}
+
+#user-welcome-message {
+  color: white;
+  font-size: 125%;
+  padding-top: 2%;
+  align-items: center;
+  text-align: center;
+}
+
+.user-important-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  width: 100%;
+  padding: 2em;
+}
+
+user-interaction-box {
+  width: 33%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.test {
+  width:100%;
+}
+
+.available-rooms-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.available-room {
+    padding: 1em;
+    margin: auto;
+    align-items: center;
+}
+
+.room-image{
+  width:100%;
+}
+
+.room-details{
+  color:white;
+  text-align: center
+}
+
+.room-selector-box {
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+}
 
 @media screen and (max-width: 1130px) {
   .main-img-containter,
