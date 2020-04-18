@@ -8,6 +8,7 @@ class User {
     this.pastBookings = [];
     this.totalSpent = 0;
   }
+
   getFutureBookings(bookingData) {
     let todayDate = moment().format('YYYY/MM/DD')
     this.futureBookings = bookingData
@@ -31,7 +32,6 @@ class User {
     }, 0)
     this.totalSpent = currentUserTotal;
   }
-
 
 }
 
