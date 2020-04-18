@@ -71,7 +71,7 @@ function changeLoadPage(userName, userPassword) {
     currentUser.getFutureBookings(bookingData)
     currentUser.getPastBookings(bookingData)
     currentUser.getTotalSpent(bookingData, roomsData)
-    // domUpdates.displayUserPage(currentUser)
+    domUpdates.displayUserPage(currentUser)
   } else {
     $('#error-login-text').text('Please enter a valid Username an Password')
   }
