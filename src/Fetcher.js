@@ -16,16 +16,16 @@ class Fetcher {
       .then(response => response.json())
   }
 
-  postBookingsData(id, todaysDate, todaysNumSteps, todaysMinutesActive, todaysFlightsOfStairs) {
+  postBookingsData(userBookingRequest) {
     fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userID: id,
-        date: todaysDate,
-        roomNumber: bookingRoomNumber,
+        userID: userBookingRequest.userId,
+        date: userBookingRequest.date,
+        roomNumber: userBookingRequest.roomNumber,
       })
     })
       .then(response => response.json())
