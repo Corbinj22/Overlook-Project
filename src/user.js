@@ -33,10 +33,8 @@ class User {
     this.totalSpent = currentUserTotal;
   }
 
-  createNewBooking(pickedRoom, bookingData, requestedDate, roomsData, randomNumber) {
-    console.log(this.futureBookings);
-    let selectedRoom = roomsData.find(room => room.number === parseInt(pickedRoom))
-    let userBooking = {id: randomNumber, userId: this.id, date: requestedDate, roomServiceCharges: []}
+  createNewBooking(pickedRoom, requestedDate, randomNumber) {
+    let userBooking = {id: randomNumber, userId: this.id, date: requestedDate, roomNumber: parseInt(pickedRoom), roomServiceCharges: []}
     this.futureBookings.push(userBooking)
   }
 
