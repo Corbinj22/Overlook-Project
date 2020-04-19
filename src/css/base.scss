@@ -134,8 +134,17 @@ body {
   flex-direction: column;
 }
 
-.test {
-  width:100%;
+#user-past-bookings-box {
+  display: flex;
+  flex-direction: column;
+  height: 25%;
+  overflow: auto;
+}
+#user-upcoming-bookings-box {
+  display: flex;
+  flex-direction: column;
+  height: 25%;
+  overflow: auto;
 }
 
 .available-rooms-info {
@@ -179,5 +188,4 @@ body {
   .hotel-description {
      width:100%;
   }
-
 }
