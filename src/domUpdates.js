@@ -9,21 +9,14 @@ const domUpdates = {
         You will find your personal information below</p>
     </div>
     <div class="user-important-info">
-      <div class="user-interaction-box">
+      <form class="user-interaction-box">
         <p id="booking-instructions">Please choose a date to create a new booking</p>
-        <input id="user-requested-booking-date" type="date" placeholder="dd/mm/yyyy">
-        <button id="create-booking-button" type="button" name="button">Create Booking</button>
-        <div class="room-selector-box">
-          <p>Please select your desired room type</p>
-          <span><input type="radio" class="room-button-selector" id="residential-suite-selector" name="residential-suite" value="residential-suite"><label>Residential Suite</label></span>
-          <span><input type="radio" class="room-button-selector" id="single-room-selector" name="ingle-room" value="ingle-room"><label>Single Room</label></span>
-          <span><input type="radio" class="room-button-selector" id="junior-suite-selector" name="junior-suite" value="junior-suite"><label>Junior Suite</label></span>
-          <span><input type="radio" class="room-button-selector" id="suite-selector" name="suite" value="suite"><label>Suite</label></span>
-        </div>
-        <div id='available-room-details'>
-        </div>
+        <input id="user-requested-booking-date" type="date" name="date" required></input>
+        <button class='disabled' id="booking-button" type="submit" name="button">Create Booking</button>
+        <fieldset id='available-room-details'>
+        </fieldset>
         <p id='total-user-spent'></p>
-      </div>
+      </form>
       <div class="user-upcoming-bookings-box">
         <p id="upcoming-bookings-text">All Upcoming Bookings</p>
         <ul id="user-upcoming-bookings-list">
@@ -65,14 +58,14 @@ const domUpdates = {
         <p class="room-details">Size of Bed: Queen</p>
       </div>
     </div>`)
-    this.insertFutureBookings(currentUser)
     this.insertPastBookings(currentUser)
+    this.insertFutureBookings(currentUser)
     this.insertTotalSpent(currentUser)
   },
 
   insertFutureBookings(currentUser) {
     currentUser.futureBookings.forEach(booking => {
-      $('#user-upcoming-bookings-list').append(`<li>${booking}</li>`)
+      $('#user-upcoming-bookings-list').append(`<li>${booking.date}</li>`)
     })
   },
 
@@ -84,7 +77,24 @@ const domUpdates = {
 
   insertTotalSpent(currentUser) {
     $('#total-user-spent').text(`You have spent a total of $${currentUser.totalSpent}`)
+  },
+
+  insertAvailableRooms(requestedDate, bookingData, roomsData) {
+    $('#available-room-details').text('')
+    let formatedDate = requestedDate.split('-').join('/')
+    let bookingsPerDay = bookingData
+      .filter(booking => booking.date === formatedDate)
+      .map(room => room.roomNumber)
+    let availableRooms = roomsData.filter(room => {
+      if (!bookingsPerDay.includes(room.number)) {
+        return room;
+      }
+    })
+    availableRooms.forEach(room => {
+      $('#available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
+    })
   }
+
 }
 
 export default domUpdates;
