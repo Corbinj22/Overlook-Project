@@ -1,9 +1,9 @@
 const moment = require('moment')
 
 class User {
-  constructor(name, id) {
-    this.name = name;
-    this.id = id;
+  constructor(userDetails) {
+    this.name = userDetails.name;
+    this.id = userDetails.id;
     this.futureBookings = [];
     this.pastBookings = [];
     this.totalSpent = 0;
@@ -31,6 +31,13 @@ class User {
       return acc;
     }, 0)
     this.totalSpent = currentUserTotal;
+  }
+
+  createNewBooking(pickedRoom, bookingData, requestedDate, roomsData, randomNumber) {
+    console.log(this.futureBookings);
+    let selectedRoom = roomsData.find(room => room.number === parseInt(pickedRoom))
+    let userBooking = {id: randomNumber, userId: this.id, date: requestedDate, roomServiceCharges: []}
+    this.futureBookings.push(userBooking)
   }
 
 }
