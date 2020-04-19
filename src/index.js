@@ -15,13 +15,10 @@ const moment = require('moment')
 function getAllData() {
   let fetchedUserData = fetcher.fetchUserData()
     .then(data => data);
-
   let fetchedBookingsData = fetcher.fetchBookingsData()
     .then(data => data);
-
   let fetchedRoomsData = fetcher.fetchRoomsData()
     .then(data => data);
-
   return Promise.all([fetchedUserData, fetchedBookingsData, fetchedRoomsData]);
 }
 
@@ -47,19 +44,38 @@ $('#login-image').click(function() {
   changeLoadPage(userName, userPassword)
 })
 
-$('.static-container').change(function() {
-  let test = $("#user-requested-booking-date").val()
-  console.log(test);
+$('.static-container').change(function(event) {
+  if (event.target.id === "user-requested-booking-date") {
+    let userRequestedDate = $("#user-requested-booking-date").val()
+    domUpdates.insertAvailableRooms(userRequestedDate, bookingData, roomsData)
+  }
+})
+
+$('.static-container').click(function(event) {
+  if ($('#available-room-details').find('input[type= radio]:checked').attr('id')) {
+    $('#booking-button').removeClass('disabled')
+  }
+})
+
+$(document).on('submit','.user-interaction-box', function(event) {
+  event.preventDefault()
+  let requestedDate = $("#user-requested-booking-date").val()
+  let formatedDate = requestedDate.split('-').join('/')
+  let pickedRoom = $('#available-room-details').find('input[type= radio]:checked').attr('id')
+  let userBookingRequest = {userId: parseInt(currentUser.id), date: formatedDate, roomNumber: parseInt(pickedRoom)}
+  fetcher.postBookingsData(userBookingRequest);
+  currentUser.createNewBooking(pickedRoom, requestedDate, generateRandomString())
+  domUpdates.insertFutureBookings(currentUser)
 })
 
 function changeLoadPage(userName, userPassword) {
-  var userId = parseInt(userName.match(/\d+/));
+  let userId = parseInt(userName.match(/\d+/));
   if (userName === 'manager' && userPassword === 'overlook2020') {
     console.log(1);
 
   } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
     let currentUserData = userData[userId]
-    currentUser = new User(currentUserData.name, currentUserData.id)
+    currentUser = new User(currentUserData)
     currentUser.getFutureBookings(bookingData)
     currentUser.getPastBookings(bookingData)
     currentUser.getTotalSpent(bookingData, roomsData)
@@ -69,13 +85,9 @@ function changeLoadPage(userName, userPassword) {
   }
 }
 
-
-// $("#user-requested-booking-date").datepicker({
-//    onSelect: function(dateText, inst) {
-//       var dateAsString = dateText; //the first parameter of this function
-//       var dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
-//    }
-// });
-
+function generateRandomString() {
+   let randomString = Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 9)
+   return randomString;
+}
 
 getAllData().then(data => setData(data))
