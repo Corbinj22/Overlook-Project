@@ -5,6 +5,10 @@
   @include default-page-behavior;
 }
 
+input {
+  margin: .4em;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -121,12 +125,13 @@ body {
   color: white;
   width: 100%;
   padding: 2em;
+  height: 30em;
 }
 
-user-interaction-box {
+.user-interaction-box {
   width: 33%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
 }
 
 .test {
@@ -162,9 +167,17 @@ user-interaction-box {
   padding: .5em;
 }
 
+#available-room-details {
+  display: flex;
+  flex-direction: column;
+  height: 25%;
+  overflow: auto;
+}
+
 @media screen and (max-width: 1130px) {
   .main-img-containter,
   .hotel-description {
      width:100%;
   }
+
 }
