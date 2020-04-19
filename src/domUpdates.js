@@ -64,8 +64,9 @@ const domUpdates = {
   },
 
   insertFutureBookings(currentUser) {
+    $('#user-upcoming-bookings-list').text('')
     currentUser.futureBookings.forEach(booking => {
-      $('#user-upcoming-bookings-list').append(`<li>${booking.date}</li>`)
+      $('#user-upcoming-bookings-list').append(`<li>${booking.date} in room ${booking.roomNumber}</li>`)
     })
   },
 
@@ -76,7 +77,7 @@ const domUpdates = {
   },
 
   insertTotalSpent(currentUser) {
-    $('#total-user-spent').text(`You have spent a total of $${currentUser.totalSpent}`)
+    $('#total-user-spent').text(`You have spent a total of $${currentUser.totalSpent.toFixed(2)}`)
   },
 
   insertAvailableRooms(requestedDate, bookingData, roomsData) {
