@@ -14,6 +14,10 @@ class Manager {
     return totalRevenue
   }
 
+  // getTotalDailyBooked(bookingData, todayDate, roomsData) {
+  //
+  // }
+
   getUserFutureBookings(foundUser, todayDate, bookingData) {
     let usersPastBookings = bookingData
       .filter(booking => booking.userID === foundUser.id)
@@ -21,8 +25,11 @@ class Manager {
     return usersPastBookings;
   }
 
-  getUserPastBookings(foundUser) {
-
+  getUserPastBookings(foundUser, todayDate, bookingData) {
+    let usersPastBookings = bookingData
+      .filter(booking => booking.userID === foundUser.id)
+      .filter(booking => booking.date > todayDate)
+    return usersPastBookings;
   }
 }
 
