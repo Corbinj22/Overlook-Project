@@ -3,7 +3,6 @@ import $ from 'jquery'
 const domUpdates = {
   displayUserPage(currentUser) {
     $('.static-container').text(' ')
-
     $('.static-container').append(`<div class="welcome-message-box">
       <p id="user-welcome-message">Thank you for choosing to stay with Kebahagiaan Jungle Resort.
         You will find your personal information below</p>
@@ -63,6 +62,54 @@ const domUpdates = {
     this.insertTotalSpent(currentUser)
   },
 
+  displayMangerPage(currentUser) {
+    $('.static-container').text(' ')
+    $('.static-container').append(`<div class="manager-top-box">
+        <section class="hotel-overview-info">
+          <p id="hotel-glance-description">Rooms Available Today 12</p>
+          <p id="hotel-revenue-today"></p>
+          <p id="hotel-percentage-available">45% of rooms are booked today</p>
+        </section>
+      </div>
+      <div class="manager-bottom-box">
+        <section class="manager-bottom-sections" id="manager-bottom-1">
+          <form class="guest-search-form">
+            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Antone Olson">
+            <button class="search-guest-button" type="button" name="button">Search For Guest</button>
+            <p id='searched-guest-name'>Justin Corbin</p>
+            <p id=searched-guest-spent>Guest has spent $234.00</p>
+          </form>
+          <form class="manager-create-booking">
+            <p>Create New Booking Below</p>
+            <input id="manager-requested-booking-date" type="date" name="date" required></input>
+            <button class='disabled' id="manager-booking-button" type="submit" name="button">Create Booking</button>
+            <fieldset id='available-rooms'>
+            </fieldset>
+          </form>
+        </section>
+        <section class="manager-bottom-sections" id="manager-bottom-2">
+          <p>Guests Past Bookings</p>
+          <ul class="manager-search-past-bookings">
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
+          </ul>
+        </section>
+        <section class="manager-bottom-sections" id="manager-bottom-3">
+          <p>Guest Future Bookings</p>
+          <ul class="manager-search-future-bookings">
+          </ul>
+        </section>
+      </div>`)
+    this.insertTotalRevenue(currentUser)
+  },
+
   insertFutureBookings(currentUser) {
     $('#user-upcoming-bookings-list').text('')
     currentUser.futureBookings.forEach(booking => {
@@ -94,6 +141,18 @@ const domUpdates = {
     availableRooms.forEach(room => {
       $('#available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
     })
+  },
+
+  insertTotalRevenue(currentUser) {
+    $('#hotel-revenue-today').text(`Total Revenue Today is $${currentUser.dailyRevenue}`)
+  },
+
+  insertGuestFutureBookings(guestBookings) {
+    $('.manager-search-future-bookings').text('')
+    guestBookings.forEach(booking => {
+      $('.manager-search-future-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+    })
+    console.log(guestBookings.length);
   }
 
 }
