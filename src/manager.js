@@ -2,7 +2,7 @@ import domUpdates from './domUpdates.js'
 
 class Manager {
   constructor() {
-    this.dailyRevenue = 0;
+    this.dailyRevenue = undefined;
   }
   getDailyRevenue(bookingData, currentDate, roomsData) {
     let allDailyBookings = bookingData.filter(booking => booking.date === currentDate)
@@ -13,10 +13,6 @@ class Manager {
     this.dailyRevenue = totalRevenue;
     return totalRevenue
   }
-
-  // getTotalDailyBooked(bookingData, todayDate, roomsData) {
-  //
-  // }
 
   getUserFutureBookings(foundUser, todayDate, bookingData) {
     let usersPastBookings = bookingData
