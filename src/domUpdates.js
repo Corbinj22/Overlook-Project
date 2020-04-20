@@ -10,9 +10,9 @@ const domUpdates = {
     <div class="user-important-info">
       <form class="user-interaction-box">
         <p id="booking-instructions">Please choose a date to create a new booking</p>
-        <input id="user-requested-booking-date" type="date" name="date" required></input>
-        <button class='disabled' id="booking-button" type="submit" name="button">Create Booking</button>
-        <fieldset id='available-room-details'>
+        <input class="user-requested-booking-date" type="date" name="date" required></input>
+        <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
+        <fieldset class='available-room-details'>
         </fieldset>
         <p id='total-user-spent'></p>
       </form>
@@ -81,9 +81,9 @@ const domUpdates = {
           </form>
           <form class="manager-create-booking">
             <p>Create New Guest Booking Below</p>
-            <input id="manager-requested-booking-date" type="date" name="date" required></input>
-            <button class='disabled' id="manager-booking-button" type="submit" name="button">Create Booking</button>
-            <fieldset id='available-rooms'>
+            <input class="user-requested-booking-date" type="date" name="date" required></input>
+            <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
+            <fieldset class='available-room-details'>
             </fieldset>
           </form>
         </section>
@@ -119,7 +119,7 @@ const domUpdates = {
   },
 
   insertAvailableRooms(requestedDate, bookingData, roomsData) {
-    $('#available-room-details').text('')
+    $('.available-room-details').text('')
     let formatedDate = requestedDate.split('-').join('/')
     let bookingsPerDay = bookingData
       .filter(booking => booking.date === formatedDate)
@@ -130,7 +130,7 @@ const domUpdates = {
       }
     })
     availableRooms.forEach(room => {
-      $('#available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
+      $('.available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
     })
   },
 
