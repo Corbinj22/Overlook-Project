@@ -60,10 +60,10 @@ $('.static-container').click(function(event) {
     let todayDate = moment().format('YYYY/MM/DD')
     let searchedName = $('.search-guest-input').val()
     let foundUser = userData.find(user => user.name === searchedName)
-    // currentUser.getUserFutureBookings(foundUser, todayDate, bookingData)
-    // currentUser.getUserPastBookings(foundUser)
     domUpdates.insertGuestFutureBookings(currentUser.getUserFutureBookings(foundUser, todayDate, bookingData))
-    // domUpdates.displayUserPastBookings(foundUser)
+    domUpdates.insertGuestPastBookings(currentUser.getUserPastBookings(foundUser, todayDate, bookingData))
+    domUpdates.insertGuestName(foundUser)
+    domUpdates.insertGuestTotalSpent(foundUser, bookingData, roomsData)
   }
 })
 
@@ -85,6 +85,7 @@ function changeLoadPage(userName, userPassword) {
   if (userName === 'manager' && userPassword === 'overlook2020') {
     currentUser = new Manager();
     currentUser.getDailyRevenue(bookingData, todayDate, roomsData)
+    // currentUser.getTotalDailyBooked(bookingData, todayDate, roomsData)
     domUpdates.displayMangerPage(currentUser)
 
   } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
