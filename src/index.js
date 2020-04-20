@@ -2,7 +2,7 @@ import $ from 'jquery';
 import './css/base.scss';
 import Fetcher from './Fetcher';
 import  User from './user';
-import Manger from './manager';
+import Manager from './manager';
 import domUpdates from './domUpdates.js'
 const fetcher = new Fetcher()
 
@@ -71,7 +71,9 @@ $(document).on('submit','.user-interaction-box', function(event) {
 function changeLoadPage(userName, userPassword) {
   let userId = parseInt(userName.match(/\d+/));
   if (userName === 'manager' && userPassword === 'overlook2020') {
-    console.log(1);
+    currentUser = new Manager();
+    let todayDate = moment().format('YYYY/MM/DD')
+    currentUser.getDailyRevenue(bookingData, todayDate, roomsData)
 
   } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
     let currentUserData = userData[userId]
@@ -89,5 +91,6 @@ function generateRandomString() {
    let randomString = Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 9)
    return randomString;
 }
+
 
 getAllData().then(data => setData(data))
