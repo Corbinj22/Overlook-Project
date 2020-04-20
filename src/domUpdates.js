@@ -10,9 +10,9 @@ const domUpdates = {
     <div class="user-important-info">
       <form class="user-interaction-box">
         <p id="booking-instructions">Please choose a date to create a new booking</p>
-        <input id="user-requested-booking-date" type="date" name="date" required></input>
-        <button class='disabled' id="booking-button" type="submit" name="button">Create Booking</button>
-        <fieldset id='available-room-details'>
+        <input class="user-requested-booking-date" type="date" name="date" required></input>
+        <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
+        <fieldset class='available-room-details'>
         </fieldset>
         <p id='total-user-spent'></p>
       </form>
@@ -74,16 +74,16 @@ const domUpdates = {
       <div class="manager-bottom-box">
         <section class="manager-bottom-sections" id="manager-bottom-1">
           <form class="guest-search-form">
-            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Antone Olson">
+            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Rhiannon Little">
             <button class="search-guest-button" type="button" name="button">Search For Guest</button>
             <p id='searched-guest-name'></p>
             <p id=searched-guest-spent></p>
           </form>
           <form class="manager-create-booking">
             <p>Create New Guest Booking Below</p>
-            <input id="manager-requested-booking-date" type="date" name="date" required></input>
-            <button class='disabled' id="manager-booking-button" type="submit" name="button">Create Booking</button>
-            <fieldset id='available-rooms'>
+            <input class="user-requested-booking-date" type="date" name="date" required></input>
+            <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
+            <fieldset class='available-room-details'>
             </fieldset>
           </form>
         </section>
@@ -119,7 +119,7 @@ const domUpdates = {
   },
 
   insertAvailableRooms(requestedDate, bookingData, roomsData) {
-    $('#available-room-details').text('')
+    $('.available-room-details').text('')
     let formatedDate = requestedDate.split('-').join('/')
     let bookingsPerDay = bookingData
       .filter(booking => booking.date === formatedDate)
@@ -130,7 +130,7 @@ const domUpdates = {
       }
     })
     availableRooms.forEach(room => {
-      $('#available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
+      $('.available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
     })
   },
 
@@ -141,14 +141,15 @@ const domUpdates = {
   insertGuestFutureBookings(guestBookings) {
     $('.manager-search-future-bookings').text('')
     guestBookings.forEach(booking => {
-      $('.manager-search-future-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+      console.log(booking);
+      $('.manager-search-future-bookings').append(`<li><button class='delete-booking-button' id='${booking.id}' type="button">Delete Booking</button>Room ${booking.roomNumber} on ${booking.date}</li>`)
     })
   },
 
   insertGuestPastBookings(guestBookings) {
     $('.manager-search-past-bookings').text('')
     guestBookings.forEach(booking => {
-      $('.manager-search-past-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+      $('.manager-search-past-bookings').append(`<li>Room ${booking.roomNumber} on ${booking.date}</li>`)
     })
   },
 
@@ -194,6 +195,14 @@ const domUpdates = {
     let percentage = availableRooms.length*100/roomsData.length
     $('#hotel-percentage-available').append(`Hotel has ${percentage}% room availability today`)
   },
+
+  displayUpdatedFutureGuestBookings(data) {
+    $('.manager-search-future-bookings').append(`<li><button type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
+  },
+
+  deleteGuestBooking() {
+
+  }
 
 }
 

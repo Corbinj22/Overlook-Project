@@ -45,15 +45,15 @@ $('#login-image').click(function() {
 })
 
 $('.static-container').change(function(event) {
-  if (event.target.id === "user-requested-booking-date") {
-    let userRequestedDate = $("#user-requested-booking-date").val()
+  if ($(event.target).hasClass('user-requested-booking-date')) {
+    let userRequestedDate = $(".user-requested-booking-date").val()
     domUpdates.insertAvailableRooms(userRequestedDate, bookingData, roomsData)
   }
 })
 
 $('.static-container').click(function(event) {
-  if ($('#available-room-details').find('input[type= radio]:checked').attr('id')) {
-    $('#booking-button').removeClass('disabled')
+  if ($('.available-room-details').find('input[type= radio]:checked').attr('id')) {
+    $('.booking-button').removeClass('disabled')
   }
 
   if ($(event.target).hasClass('search-guest-button')) {
@@ -61,7 +61,7 @@ $('.static-container').click(function(event) {
     let searchedName = $('.search-guest-input').val()
     let foundUser = userData.find(user => user.name === searchedName)
     domUpdates.insertGuestFutureBookings(currentUser.getUserFutureBookings(foundUser, todayDate, bookingData))
-    domUpdates.insertGuestPastBookings(currentUser.getUserPastBookings(foundUser, todayDate, bookingData))
+    domUpdates.insertGuestPastBookings(currentUser.getGuestPastBookings(foundUser, todayDate, bookingData))
     domUpdates.insertGuestName(foundUser)
     domUpdates.insertGuestTotalSpent(foundUser, bookingData, roomsData)
   }
@@ -69,13 +69,27 @@ $('.static-container').click(function(event) {
 
 $(document).on('submit','.user-interaction-box', function(event) {
   event.preventDefault()
-  let requestedDate = $("#user-requested-booking-date").val()
+  let requestedDate = $(".user-requested-booking-date").val()
   let formatedDate = requestedDate.split('-').join('/')
-  let pickedRoom = $('#available-room-details').find('input[type= radio]:checked').attr('id')
+  let pickedRoom = $('.available-room-details').find('input[type= radio]:checked').attr('id')
   let userBookingRequest = {userId: parseInt(currentUser.id), date: formatedDate, roomNumber: parseInt(pickedRoom)}
   fetcher.postBookingsData(userBookingRequest);
   currentUser.createNewBooking(pickedRoom, requestedDate, generateRandomString())
   domUpdates.insertFutureBookings(currentUser)
+  getAllData().then(data => setData(data))
+})
+
+$(document).on('submit','.manager-create-booking', function(event) {
+  event.preventDefault()
+  let todayDate = moment().format('YYYY/MM/DD')
+  let searchedName = $('.search-guest-input').val()
+  let foundUser = userData.find(user => user.name === searchedName)
+  let requestedDate = $(".user-requested-booking-date").val()
+  let formatedDate = requestedDate.split('-').join('/')
+  let pickedRoom = $('.available-room-details').find('input[type= radio]:checked').attr('id')
+  let userBookingRequest = {userId: parseInt(foundUser.id), date: formatedDate, roomNumber: parseInt(pickedRoom)}
+  fetcher.postBookingsData(userBookingRequest).then(data => domUpdates.displayUpdatedFutureGuestBookings(data));
+  getAllData().then(data => setData(data))
 })
 
 function changeLoadPage(userName, userPassword) {
@@ -88,7 +102,6 @@ function changeLoadPage(userName, userPassword) {
     domUpdates.displayMangerPage(currentUser)
     domUpdates.displayTotalDailyBooked(bookingData, todayDate, roomsData)
     domUpdates.displayPercentageRoomsAvailable(bookingData, todayDate, roomsData)
-
   } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
     let currentUserData = userData[userId]
     currentUser = new User(currentUserData)
@@ -96,7 +109,6 @@ function changeLoadPage(userName, userPassword) {
     currentUser.getPastBookings(bookingData)
     currentUser.getTotalSpent(bookingData, roomsData)
     domUpdates.displayUserPage(currentUser)
-
   } else {
     $('#error-login-text').text('Please enter a valid Username an Password')
   }

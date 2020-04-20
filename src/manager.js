@@ -17,16 +17,19 @@ class Manager {
   getUserFutureBookings(foundUser, todayDate, bookingData) {
     let usersPastBookings = bookingData
       .filter(booking => booking.userID === foundUser.id)
+      .filter(booking => booking.date > todayDate)
+    return usersPastBookings;
+  }
+
+  getGuestPastBookings(foundUser, todayDate, bookingData) {
+    let usersPastBookings = bookingData
+      .filter(booking => booking.userID === foundUser.id)
       .filter(booking => booking.date < todayDate)
     return usersPastBookings;
   }
 
-  getUserPastBookings(foundUser, todayDate, bookingData) {
-    let usersPastBookings = bookingData
-      .filter(booking => booking.userID === foundUser.id)
-      .filter(booking => booking.date > todayDate)
-    return usersPastBookings;
-  }
 }
+
+
 
 export default Manager;
