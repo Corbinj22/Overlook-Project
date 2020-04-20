@@ -66,9 +66,9 @@ const domUpdates = {
     $('.static-container').text(' ')
     $('.static-container').append(`<div class="manager-top-box">
         <section class="hotel-overview-info">
-          <p id="hotel-glance-description">Rooms Available Today 12</p>
+          <p id="hotel-available-rooms">Rooms Available Today 12</p>
           <p id="hotel-revenue-today"></p>
-          <p id="hotel-percentage-available">45% of rooms are booked today</p>
+          <p id="hotel-percentage-available"></p>
         </section>
       </div>
       <div class="manager-bottom-box">
@@ -166,7 +166,34 @@ const domUpdates = {
     }, 0).toFixed(2)
     $('#searched-guest-spent').text('')
     $('#searched-guest-spent').append(`Guest has spent $${currentUserTotal}`)
-  }
+  },
+
+  displayTotalDailyBooked(bookingData, todayDate, roomsData) {
+    $('#hotel-available-rooms').text('')
+    let bookingsPerDay = bookingData
+      .filter(booking => booking.date === todayDate)
+      .map(room => room.roomNumber)
+    let availableRooms = roomsData.filter(room => {
+      if (!bookingsPerDay.includes(room.number)) {
+        return room;
+      }
+    })
+    $('#hotel-available-rooms').append(`Hotel has ${availableRooms.length} room available today`)
+  },
+
+  displayPercentageRoomsAvailable(bookingData, todayDate, roomsData) {
+    $('#hotel-percentage-available').text('')
+    let bookingsPerDay = bookingData
+      .filter(booking => booking.date === todayDate)
+      .map(room => room.roomNumber)
+    let availableRooms = roomsData.filter(room => {
+      if (!bookingsPerDay.includes(room.number)) {
+        return room;
+      }
+    })
+    let percentage = availableRooms.length*100/roomsData.length
+    $('#hotel-percentage-available').append(`Hotel has ${percentage}% room availability today`)
+  },
 
 }
 
