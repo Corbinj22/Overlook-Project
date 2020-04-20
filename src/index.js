@@ -85,8 +85,9 @@ function changeLoadPage(userName, userPassword) {
   if (userName === 'manager' && userPassword === 'overlook2020') {
     currentUser = new Manager();
     currentUser.getDailyRevenue(bookingData, todayDate, roomsData)
-    // currentUser.getTotalDailyBooked(bookingData, todayDate, roomsData)
     domUpdates.displayMangerPage(currentUser)
+    domUpdates.displayTotalDailyBooked(bookingData, todayDate, roomsData)
+    domUpdates.displayPercentageRoomsAvailable(bookingData, todayDate, roomsData)
 
   } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
     let currentUserData = userData[userId]
