@@ -76,11 +76,11 @@ const domUpdates = {
           <form class="guest-search-form">
             <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Antone Olson">
             <button class="search-guest-button" type="button" name="button">Search For Guest</button>
-            <p id='searched-guest-name'>Justin Corbin</p>
-            <p id=searched-guest-spent>Guest has spent $234.00</p>
+            <p id='searched-guest-name'></p>
+            <p id=searched-guest-spent></p>
           </form>
           <form class="manager-create-booking">
-            <p>Create New Booking Below</p>
+            <p>Create New Guest Booking Below</p>
             <input id="manager-requested-booking-date" type="date" name="date" required></input>
             <button class='disabled' id="manager-booking-button" type="submit" name="button">Create Booking</button>
             <fieldset id='available-rooms'>
@@ -90,15 +90,6 @@ const domUpdates = {
         <section class="manager-bottom-sections" id="manager-bottom-2">
           <p>Guests Past Bookings</p>
           <ul class="manager-search-past-bookings">
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
-            <li>SKJDHFLSKJHDFLSKDJFHSLDKJFH</li>
           </ul>
         </section>
         <section class="manager-bottom-sections" id="manager-bottom-3">
@@ -152,7 +143,29 @@ const domUpdates = {
     guestBookings.forEach(booking => {
       $('.manager-search-future-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
     })
-    console.log(guestBookings.length);
+  },
+
+  insertGuestPastBookings(guestBookings) {
+    $('.manager-search-past-bookings').text('')
+    guestBookings.forEach(booking => {
+      $('.manager-search-past-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+    })
+  },
+
+  insertGuestName(foundUser) {
+    $('#searched-guest-name').text('')
+    $('#searched-guest-name').append(`We found information for guest ${foundUser.name}`)
+  },
+
+  insertGuestTotalSpent(foundUser, bookingData, roomsData) {
+    let allUserBookings = bookingData.filter(booking => booking.userID === foundUser.id)
+    let currentUserTotal = allUserBookings.reduce((acc, userBooking) => {
+      let roomValue = roomsData.find(room => room.number === userBooking.roomNumber).costPerNight
+      acc += roomValue
+      return acc;
+    }, 0).toFixed(2)
+    $('#searched-guest-spent').text('')
+    $('#searched-guest-spent').append(`Guest has spent $${currentUserTotal}`)
   }
 
 }
