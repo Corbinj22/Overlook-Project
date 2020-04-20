@@ -17,7 +17,7 @@ class Fetcher {
   }
 
   postBookingsData(userBookingRequest) {
-    fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
+    return fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,8 +28,7 @@ class Fetcher {
         roomNumber: userBookingRequest.roomNumber,
       })
     })
-      .then(response => response.json())
-      .then(data => console.log("success", data))
+      .then(response => {return response.json()})
       .catch(err => console.log("error", err.message))
   }
 
