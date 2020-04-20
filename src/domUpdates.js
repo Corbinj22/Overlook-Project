@@ -198,6 +198,10 @@ const domUpdates = {
 
   displayUpdatedFutureGuestBookings(data) {
     $('.manager-search-future-bookings').append(`<li><button type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
+  },
+
+  deleteGuestBooking() {
+
   }
 
 }
