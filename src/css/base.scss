@@ -175,14 +175,14 @@ body {
   padding: .5em;
 }
 
-#available-room-details {
+.available-room-details {
   display: flex;
   flex-direction: column;
-  height: 25%;
+  height: 50%;
   overflow: auto;
 }
 //End User Styling
-//Start Manger Styling
+//Start Manager Styling
 .manager-top-box{
   width:100%;
   color:white;
@@ -201,8 +201,30 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
+  width: 100%;
+  padding: 2em;
 }
 
+.manager-create-booking {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  overflow: auto;
+}
+
+.manager-bottom-sections {
+  height: 30em;
+  overflow: scroll;
+}
+
+#manager-bottom-1 {
+  width:49%;
+}
+
+#manager-bottom-2
+#manager-bottom-3 {
+  width:25%;
+}
 
 @media screen and (max-width: 1130px) {
   .main-img-containter,
