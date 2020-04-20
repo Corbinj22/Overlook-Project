@@ -74,7 +74,7 @@ const domUpdates = {
       <div class="manager-bottom-box">
         <section class="manager-bottom-sections" id="manager-bottom-1">
           <form class="guest-search-form">
-            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Antone Olson">
+            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Rhiannon Little">
             <button class="search-guest-button" type="button" name="button">Search For Guest</button>
             <p id='searched-guest-name'></p>
             <p id=searched-guest-spent></p>
@@ -141,14 +141,15 @@ const domUpdates = {
   insertGuestFutureBookings(guestBookings) {
     $('.manager-search-future-bookings').text('')
     guestBookings.forEach(booking => {
-      $('.manager-search-future-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+      console.log(booking);
+      $('.manager-search-future-bookings').append(`<li><button class='delete-booking-button' id='${booking.id}' type="button">Delete Booking</button>Room ${booking.roomNumber} on ${booking.date}</li>`)
     })
   },
 
   insertGuestPastBookings(guestBookings) {
     $('.manager-search-past-bookings').text('')
     guestBookings.forEach(booking => {
-      $('.manager-search-past-bookings').append(`Room <li>${booking.roomNumber} on ${booking.date}</li>`)
+      $('.manager-search-past-bookings').append(`<li>Room ${booking.roomNumber} on ${booking.date}</li>`)
     })
   },
 
@@ -194,6 +195,10 @@ const domUpdates = {
     let percentage = availableRooms.length*100/roomsData.length
     $('#hotel-percentage-available').append(`Hotel has ${percentage}% room availability today`)
   },
+
+  displayUpdatedFutureGuestBookings(data) {
+    $('.manager-search-future-bookings').append(`<li><button type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
+  }
 
 }
 
