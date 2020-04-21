@@ -15,10 +15,10 @@ class Manager {
   }
 
   getUserFutureBookings(foundUser, todayDate, bookingData) {
-    let usersPastBookings = bookingData
+    let usersFutureBookings = bookingData
       .filter(booking => booking.userID === foundUser.id)
       .filter(booking => booking.date > todayDate)
-    return usersPastBookings;
+    return usersFutureBookings;
   }
 
   getGuestPastBookings(foundUser, todayDate, bookingData) {
