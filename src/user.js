@@ -26,7 +26,7 @@ class User {
   getTotalSpent(bookingData, roomsData) {
     let allUserBookings = bookingData.filter(booking => booking.userID === this.id)
     let currentUserTotal = allUserBookings.reduce((acc, userBooking) => {
-      let roomValue = roomsData.find(room => room.number === userBooking.roomNumber).costPerNight
+      let roomValue = roomsData.find(room => room.number === userBooking.roomNumber).costPerNight;
       acc += roomValue
       return acc;
     }, 0)
