@@ -28,6 +28,27 @@ function setData(data) {
   roomsData = data[2].rooms;
 }
 
+function changeLoadPage(userName, userPassword) {
+  let userId = parseInt(userName.match(/\d+/));
+  let todayDate = moment().format('YYYY/MM/DD')
+  if (userName === 'manager' && userPassword === 'overlook2020') {
+    currentUser = new Manager();
+    currentUser.getDailyRevenue(bookingData, todayDate, roomsData)
+    domUpdates.displayMangerPage(currentUser)
+    domUpdates.displayTotalDailyBooked(bookingData, todayDate, roomsData)
+    domUpdates.displayPercentageRoomsAvailable(bookingData, todayDate, roomsData)
+  } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
+    let currentUserData = userData[userId]
+    currentUser = new User(currentUserData)
+    currentUser.getFutureBookings(bookingData)
+    currentUser.getPastBookings(bookingData)
+    currentUser.getTotalSpent(bookingData, roomsData)
+    domUpdates.displayUserPage(currentUser)
+  } else {
+    $('#error-login-text').text('Please enter a valid Username an Password')
+  }
+}
+
 $('.login-box').keyup(function() {
   if ($('#login-Name').val().length >= 1 && $('#login-Password').val().length >= 1) {
     $('#login-image').removeClass("disabled")
@@ -65,6 +86,12 @@ $('.static-container').click(function(event) {
     domUpdates.insertGuestName(foundUser)
     domUpdates.insertGuestTotalSpent(foundUser, bookingData, roomsData)
   }
+
+  if ($(event.target).hasClass('delete-booking-button')) {
+    let targetId = parseInt(event.target.id)
+    fetcher.deleteReservation(targetId)
+    domUpdates.deleteGuestBooking(targetId)
+  }
 })
 
 $(document).on('submit','.user-interaction-box', function(event) {
@@ -91,28 +118,6 @@ $(document).on('submit','.manager-create-booking', function(event) {
   fetcher.postBookingsData(userBookingRequest).then(data => domUpdates.displayUpdatedFutureGuestBookings(data));
   getAllData().then(data => setData(data))
 })
-
-function changeLoadPage(userName, userPassword) {
-  let userId = parseInt(userName.match(/\d+/));
-  let todayDate = moment().format('YYYY/MM/DD')
-
-  if (userName === 'manager' && userPassword === 'overlook2020') {
-    currentUser = new Manager();
-    currentUser.getDailyRevenue(bookingData, todayDate, roomsData)
-    domUpdates.displayMangerPage(currentUser)
-    domUpdates.displayTotalDailyBooked(bookingData, todayDate, roomsData)
-    domUpdates.displayPercentageRoomsAvailable(bookingData, todayDate, roomsData)
-  } else if (userId <= 50 && userName.includes('customer') && userPassword === 'overlook2020') {
-    let currentUserData = userData[userId]
-    currentUser = new User(currentUserData)
-    currentUser.getFutureBookings(bookingData)
-    currentUser.getPastBookings(bookingData)
-    currentUser.getTotalSpent(bookingData, roomsData)
-    domUpdates.displayUserPage(currentUser)
-  } else {
-    $('#error-login-text').text('Please enter a valid Username an Password')
-  }
-}
 
 function generateRandomString() {
    let randomString = Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 9)
