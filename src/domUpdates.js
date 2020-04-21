@@ -141,8 +141,7 @@ const domUpdates = {
   insertGuestFutureBookings(guestBookings) {
     $('.manager-search-future-bookings').text('')
     guestBookings.forEach(booking => {
-      console.log(booking);
-      $('.manager-search-future-bookings').append(`<li><button class='delete-booking-button' id='${booking.id}' type="button">Delete Booking</button>Room ${booking.roomNumber} on ${booking.date}</li>`)
+      $('.manager-search-future-bookings').append(`<li class='${booking.id}'><button class='delete-booking-button' id='${booking.id}' type="button">Delete Booking</button>Room ${booking.roomNumber} on ${booking.date}</li>`)
     })
   },
 
@@ -200,8 +199,9 @@ const domUpdates = {
     $('.manager-search-future-bookings').append(`<li><button type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
   },
 
-  deleteGuestBooking() {
-
+  deleteGuestBooking(targetId) {
+    let stringId = targetId.toString()
+    $(`.${stringId}`).remove()
   }
 
 }
