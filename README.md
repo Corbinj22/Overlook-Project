@@ -7,7 +7,7 @@
 
  Each student was tasked with creating a functioning desktop and mobile friendly website that allows for management and bookings for the hotel. 
 
- Overlook's project specifications can be found here [project](https://frontend.turing.io/projects/overlook.html)
+ Overlook's project specifications can be found [here](https://frontend.turing.io/projects/overlook.html)
 
  Overall, the project was an excellent chance for students to showcase all that they have learned over the previous two innings.
 
