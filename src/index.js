@@ -98,7 +98,7 @@ $('.static-container').click(function(event) {
   }
 })
 
-$(document).on('submit','.user-interaction-box', function(event) {
+$(document).on('submit', '.user-interaction-box', function(event) {
   event.preventDefault()
   let requestedDate = $(".user-requested-booking-date").val()
   let formatedDate = requestedDate.split('-').join('/')
@@ -110,9 +110,8 @@ $(document).on('submit','.user-interaction-box', function(event) {
   getAllData().then(data => setData(data))
 })
 
-$(document).on('submit','.manager-create-booking', function(event) {
+$(document).on('submit', '.manager-create-booking', function(event) {
   event.preventDefault()
-  let todayDate = moment().format('YYYY/MM/DD')
   let searchedName = $('.search-guest-input').val()
   let foundUser = userData.find(user => user.name === searchedName)
   let requestedDate = $(".user-requested-booking-date").val()
@@ -124,8 +123,8 @@ $(document).on('submit','.manager-create-booking', function(event) {
 })
 
 function generateRandomString() {
-   let randomString = Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 9)
-   return randomString;
+  let randomString = Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 9)
+  return randomString;
 }
 
 function setDate() {

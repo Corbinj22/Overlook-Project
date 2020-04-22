@@ -1,5 +1,3 @@
-import domUpdates from './domUpdates.js'
-
 class Manager {
   constructor() {
     this.dailyRevenue = undefined;

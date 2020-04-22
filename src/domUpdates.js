@@ -191,7 +191,7 @@ const domUpdates = {
         return room;
       }
     })
-    let percentage = availableRooms.length*100/roomsData.length
+    let percentage = availableRooms.length * 100 / roomsData.length
     $('#hotel-percentage-available').append(`Hotel has ${percentage}% room availability today`)
   },
 
