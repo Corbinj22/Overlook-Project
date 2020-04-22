@@ -43,13 +43,13 @@
 (https://drive.google.com/open?id=1QcKm0MJM-xAGsMHnK3-WiEoh070rFduZ)
 
 *Customer Booking* 
-(https://drive.google.com/file/d/1ToawZCfrTGsg9rU7yj1-sNMz7PM3gPth/view?usp=drivesdk)
+(https://drive.google.com/file/d/1ToawZCfrTGsg9rU7yj1-sNMz7PM3gPth/view?usp=drivesdk) 
 
 *Manager Login* 
-https://drive.google.com/file/d/1-SXKlCf3D_LOQ9CZoG8ZnrnvozaFa4Pa/view?usp=drivesdk
+(https://drive.google.com/file/d/1-SXKlCf3D_LOQ9CZoG8ZnrnvozaFa4Pa/view?usp=drivesdk)
 
 *Manager Booking for Customer* 
-(https://drive.google.com/open?id=1vH89naz4tcFYT-Z8GrgQ45PORQbILfaD)
+(https://drive.google.com/open?id=1vH89naz4tcFYT-Z8GrgQ45PORQbILfaD) 
 
 
 
@@ -57,21 +57,21 @@ https://drive.google.com/file/d/1-SXKlCf3D_LOQ9CZoG8ZnrnvozaFa4Pa/view?usp=drive
 
 ## Learning Goals:
 
-* Build a function application that allows for dynamic login for a user and manager
+* Build a functioning application that allows for dynamic login for a user and manager
 
 * Develop processes for working remotely and submitting pull requests to perform effective code reviews that help ensure the code is accurate and that everyone understands it
 
 * Make network requests to API endpoints to retrieve and manipulate data
 
-* Ensure our app is following best practices for accessibility
+* Ensure this app is following best practices for accessibility
 
-* Detect cross-browser compatibility issues by testing our app on different platforms and environment
+* Detect cross-browser compatibility issues by testing the app on different platforms and environments
 
-* Practice DOM manipulation with jQuery
+* Refine DOM manipulation with jQuery
 
-* Leverage Sass to DRY up our CSS
+* Leverage Sass to DRY up the CSS
 
-* Leverage Chai Spies to verify that our DOM manipulation is happening
+* Showcase all the technical skills leanred on the second (of four) quearters of the Front-end course. 
 
 
 ## Contributors
