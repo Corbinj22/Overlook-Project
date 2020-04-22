@@ -74,7 +74,7 @@ const domUpdates = {
       <div class="manager-bottom-box">
         <section class="manager-bottom-sections" id="manager-bottom-1">
           <form aria-label="search guest box" class="guest-search-form">
-            <input aria-label="search-for-guest" class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Rhiannon Little">
+            <input aria-label="search-for-guest" class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="">
             <button class="search-guest-button" type="button" name="button">Search For Guest</button>
             <p id='searched-guest-name'></p>
             <p id=searched-guest-spent></p>
