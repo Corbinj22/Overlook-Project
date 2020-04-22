@@ -23,7 +23,7 @@
 
 5. In your terminal, run `npm start` and then navigate to `http://localhost:8080/` in your browser.
 
-6. On the inital login screen to enter the Manager page enter (Username: Manager, Password: Overlook2020), to enter the Customer page enter (Username: customer(number between 1-50), Password: Overlook2020)
+6. On the inital login screen to enter the Manager page enter (Username: Manager, Password: Overlook2020), to enter the Customer page enter (Username: customer(number between 1-50), Password: Overlook2020), for a customer name search (Rhiannon Little).
 
 
 
