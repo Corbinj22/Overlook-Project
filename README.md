@@ -5,7 +5,7 @@
 
  This project was a solo project during Module 2 at [Turing School of Software & Design](https://turing.io/).
 
- Each student was tasked with creating a functioning desktop and mobile friendly website that allows for management and bookings for the hotel. 
+ Each student was tasked with creating a functioning desktop and mobile friendly website that allows for management and bookings at a hotel. 
 
  Overlook's project specifications can be found [here](https://frontend.turing.io/projects/overlook.html)
 
