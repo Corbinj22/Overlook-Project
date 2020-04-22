@@ -4,3 +4,18 @@
   box-sizing: border-box;
   font-family: 'Amiri', serif;
 }
+
+@mixin primary-flex($direction) {
+  display: flex;
+  flex-direction: $direction;
+  }
+
+@mixin font-properties($color, $font-size) {
+  color: $color;
+  font-size: $font-size;
+}
+
+@mixin overFlow($style, $y-axis) {
+  overflow: $style;
+  overflow-y: $y-axis;
+}
