@@ -10,7 +10,7 @@ const domUpdates = {
     <div class="user-important-info">
       <form class="user-interaction-box">
         <p id="booking-instructions">Please choose a date to create a new booking</p>
-        <input class="user-requested-booking-date" type="date" name="date" required></input>
+        <input aria-label="search-for-date" class="user-requested-booking-date" min='' type="date" name="date" required></input>
         <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
         <fieldset class='available-room-details'>
         </fieldset>
@@ -73,13 +73,13 @@ const domUpdates = {
       </div>
       <div class="manager-bottom-box">
         <section class="manager-bottom-sections" id="manager-bottom-1">
-          <form class="guest-search-form">
-            <input class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Rhiannon Little">
+          <form aria-label="search guest box" class="guest-search-form">
+            <input aria-label="search-for-guest" class="search-guest-input" type="text" name="" placeholder="Search Guest Name"value="Rhiannon Little">
             <button class="search-guest-button" type="button" name="button">Search For Guest</button>
             <p id='searched-guest-name'></p>
             <p id=searched-guest-spent></p>
           </form>
-          <form class="manager-create-booking">
+          <form aria-label="create booking box" class="manager-create-booking">
             <p>Create New Guest Booking Below</p>
             <input class="user-requested-booking-date" type="date" name="date" required></input>
             <button class='disabled booking-button' type="submit" name="button">Create Booking</button>
@@ -130,7 +130,7 @@ const domUpdates = {
       }
     })
     availableRooms.forEach(room => {
-      $('.available-room-details').append(`<input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label>`)
+      $('.available-room-details').append(`<div class='form-group'><input type="radio" id="${room.number}" name="available rooms" value="available room"><label for="This room is available">Room number ${room.number} is available, this room is a ${room.roomType}</label></div>`)
     })
   },
 
@@ -196,7 +196,7 @@ const domUpdates = {
   },
 
   displayUpdatedFutureGuestBookings(data) {
-    $('.manager-search-future-bookings').append(`<li><button type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
+    $('.manager-search-future-bookings').append(`<li class='${data.id}'><button id="${data.id}" class="delete-booking-button" type="button">Delete Booking</button>Room ${data.roomNumber} on ${data.date}</li>`)
   },
 
   deleteGuestBooking(targetId) {
